@@ -1,0 +1,5 @@
+{
+  "name": "AutoDoc AI",
+  "description": "Intelligent API documentation generator using simulated AST analysis and Gemini LLMs.",
+  "requestFramePermissions": []
+}
