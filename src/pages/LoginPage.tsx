@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Github, KeyRound, ExternalLink } from 'lucide-react';
 
@@ -16,6 +16,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-dark-950 flex flex-col items-center justify-center relative overflow-hidden">
+      <Link to="/" className="absolute top-6 left-6 text-gray-400 hover:text-white text-sm transition-colors z-20">&larr; Back to Home</Link>
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-600/20 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px]" />
 
