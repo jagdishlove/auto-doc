@@ -9,7 +9,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <div className="h-16 border-b border-white/10 bg-dark-900/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-50">
-      <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/dashboard')}>
+      <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
         <img src="/logo.svg" alt="AutoDoc AI" className="w-8 h-8" />
         <span className="font-bold text-lg hidden sm:block">AutoDoc AI</span>
       </div>

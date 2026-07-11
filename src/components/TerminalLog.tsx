@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { LogEntry } from '../types';
 import { Terminal, CheckCircle2, AlertCircle, Info } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -7,12 +7,27 @@ interface TerminalLogProps {
   logs: LogEntry[];
 }
 
+const relativeTime = (ts: number): string => {
+  const diff = Math.floor((Date.now() - ts) / 1000);
+  if (diff < 5) return 'just now';
+  if (diff < 60) return `${diff}s ago`;
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  return new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+};
+
 export const TerminalLog: React.FC<TerminalLogProps> = ({ logs }) => {
   const endRef = useRef<HTMLDivElement>(null);
+  const [, setTick] = useState(0);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [logs]);
+
+  useEffect(() => {
+    if (logs.length === 0) return;
+    const interval = setInterval(() => setTick(t => t + 1), 5000);
+    return () => clearInterval(interval);
+  }, [logs.length]);
 
   return (
     <div className="bg-dark-950 border border-white/10 rounded-lg overflow-hidden flex flex-col h-full font-mono text-sm shadow-2xl">
@@ -32,8 +47,8 @@ export const TerminalLog: React.FC<TerminalLogProps> = ({ logs }) => {
         )}
         {logs.map((log) => (
           <div key={log.id} className="flex items-start gap-3 animate-fade-in">
-            <span className="text-gray-600 shrink-0 select-none">
-              [{new Date(log.timestamp).toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}.{new Date(log.timestamp).getMilliseconds().toString().padStart(3, '0')}]
+            <span className="text-gray-600 shrink-0 select-none text-xs">
+              {relativeTime(log.timestamp)}
             </span>
             <div className={clsx("flex items-center gap-2", {
               'text-blue-400': log.type === 'info',

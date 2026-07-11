@@ -5,6 +5,8 @@ import { Repository } from '../types';
 import { getRepositories } from '../services/githubService';
 import { Navbar } from '../components/Navbar';
 import { FolderGit2, Search, ArrowRight, ChevronLeft, ChevronRight, Globe, Lock, Building2, Users } from 'lucide-react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const PER_PAGE = 12;
 
@@ -15,17 +17,40 @@ interface RepoSection {
   repos: Repository[];
 }
 
+const RepoSkeletonCard: React.FC = () => (
+  <div className="bg-dark-900 border border-white/10 rounded-xl p-6">
+    <div className="flex items-center gap-3 mb-4">
+      <Skeleton circle width={40} height={40} baseColor="#1e1e1e" highlightColor="#2a2a2a" />
+      <div className="flex-1">
+        <Skeleton width="60%" height={18} baseColor="#1e1e1e" highlightColor="#2a2a2a" />
+        <Skeleton width="40%" height={12} baseColor="#1e1e1e" highlightColor="#2a2a2a" style={{ marginTop: 6 }} />
+      </div>
+    </div>
+    <Skeleton count={2} baseColor="#1e1e1e" highlightColor="#2a2a2a" style={{ marginBottom: 8 }} />
+    <div className="flex items-center gap-4">
+      <Skeleton width={50} height={12} baseColor="#1e1e1e" highlightColor="#2a2a2a" />
+      <Skeleton width={40} height={12} baseColor="#1e1e1e" highlightColor="#2a2a2a" />
+      <Skeleton width={35} height={12} baseColor="#1e1e1e" highlightColor="#2a2a2a" />
+    </div>
+  </div>
+);
+
 export const DashboardPage: React.FC = () => {
   const { token, user } = useAuth();
   const navigate = useNavigate();
   const [repos, setRepos] = useState<Repository[]>([]);
+  const [loading, setLoading] = useState(true);
   const [repoSearch, setRepoSearch] = useState('');
   const [page, setPage] = useState(1);
   const [activeTab, setActiveTab] = useState('all');
 
   useEffect(() => {
     if (token) {
-      getRepositories(token).then(setRepos);
+      setLoading(true);
+      getRepositories(token).then((data) => {
+        setRepos(data);
+        setLoading(false);
+      });
     }
   }, [token]);
 
@@ -120,7 +145,13 @@ export const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        {repos.length > 0 && (
+        {loading ? (
+          <div className="flex items-center gap-2 mb-8">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Skeleton key={i} width={80 + i * 20} height={32} borderRadius={8} baseColor="#1e1e1e" highlightColor="#2a2a2a" />
+            ))}
+          </div>
+        ) : repos.length > 0 && (
           <div className="flex items-center gap-2 mb-8 overflow-x-auto pb-2 -mx-1 px-1">
             {tabs.map((t) => (
               <button
@@ -141,7 +172,13 @@ export const DashboardPage: React.FC = () => {
           </div>
         )}
 
-        {repos.length === 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <RepoSkeletonCard key={i} />
+            ))}
+          </div>
+        ) : repos.length === 0 ? (
           <div className="text-center py-20 opacity-50">
              <div className="animate-pulse mb-4">Loading repositories...</div>
           </div>
