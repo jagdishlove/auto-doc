@@ -4,6 +4,7 @@ export interface User {
   name: string | null;
   avatar_url: string;
   email?: string | null;
+  type?: string;
 }
 
 export interface Repository {
@@ -17,6 +18,7 @@ export interface Repository {
   language: string;
   private: boolean;
   html_url: string;
+  fork?: boolean;
 }
 
 export interface RepoFile {
