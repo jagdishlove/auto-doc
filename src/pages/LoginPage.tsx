@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Github, KeyRound, ExternalLink, Wand2 } from 'lucide-react';
+import { Github, KeyRound, ExternalLink } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const { token, isAuthenticating, authError, login } = useAuth();
@@ -21,9 +21,7 @@ export const LoginPage: React.FC = () => {
 
       <div className="relative z-10 max-w-md w-full px-6 text-center">
         <div className="mb-8 flex justify-center">
-          <div className="w-20 h-20 bg-gradient-to-tr from-brand-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-brand-500/20">
-             <Wand2 className="w-10 h-10 text-white" />
-          </div>
+          <img src="/logo.svg" alt="AutoDoc AI" className="w-20 h-20 drop-shadow-2xl" />
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">

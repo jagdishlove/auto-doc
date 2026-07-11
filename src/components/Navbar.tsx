@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Wand2, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -10,9 +10,7 @@ export const Navbar: React.FC = () => {
   return (
     <div className="h-16 border-b border-white/10 bg-dark-900/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-50">
       <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/dashboard')}>
-        <div className="w-8 h-8 bg-gradient-to-tr from-brand-500 to-purple-500 rounded-lg flex items-center justify-center">
-           <Wand2 className="w-5 h-5 text-white" />
-        </div>
+        <img src="/logo.svg" alt="AutoDoc AI" className="w-8 h-8" />
         <span className="font-bold text-lg hidden sm:block">AutoDoc AI</span>
       </div>
       <div className="flex items-center gap-4">

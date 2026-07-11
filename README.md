@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript" alt="TypeScript" />
     <img src="https://img.shields.io/badge/Vite-6-646CFF?logo=vite" alt="Vite 6" />
     <img src="https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss" alt="Tailwind CSS" />
-    <img src="https://img.shields.io/badge/Gemini_2.5--Flash-8E75B2?logo=googlegemini" alt="Gemini 2.5 Flash" />
+    <img src="https://img.shields.io/badge/LLM-Gemini_2.5-8E75B2?logo=google&logoColor=white" alt="Gemini 2.5 Flash" />
   </p>
 </div>
 
