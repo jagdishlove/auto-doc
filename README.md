@@ -1,6 +1,6 @@
 <div align="center">
   <br/>
-  <img width="120" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" alt="AutoDoc AI Logo" style="border-radius: 24px;" />
+  <img width="120" src="public/logo.svg" alt="AutoDoc AI Logo" />
   <h1 align="center">AutoDoc AI</h1>
   <p align="center">
     <strong>Intelligent API documentation generator</strong><br/>
